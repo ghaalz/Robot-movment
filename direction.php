@@ -8,10 +8,7 @@
     
 
    $move = $_POST["move"];
-   $right = $_POST["move"]=="right";
-   $left = $_POST["move"]=="left";
-   $forward = $_POST["move"]=="forward";
-   $backward = $_POST["move"]=="backward";
+   $stop = $_POST["stop"];
    
 
     $servername = "localhost";
@@ -33,6 +30,17 @@
     else {
      echo "Error" . $conn->error;
     }
+
+    $sql = "SELECT name FROM directions"; 
+    $result = mysqli_query($conn, $sql); 
+     
+    if(isset($_POST["stop"])) {
+    if (mysqli_num_rows($result) > 0) { 
+      if ($row = mysqli_fetch_assoc($result)) { 
+          echo " last direction is: " . $row["name"]. "<br>"; 
+      } 
+      echo "s";
+  }  }
 
     print("<h2>$move</h2>");
     
